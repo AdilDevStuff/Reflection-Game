@@ -1,0 +1,28 @@
+[gd_scene load_steps=2 format=3 uid="uid://def2eojugjglu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_af0m4"]
+size = Vector2(64, 16)
+
+[node name="Mirror" type="CharacterBody2D" groups=["Mirror"]]
+collision_layer = 4
+collision_mask = 2
+
+[node name="MirrorPivot" type="Node2D" parent="."]
+position = Vector2(0, -8)
+rotation = -1.309
+
+[node name="Sprite2D" type="Polygon2D" parent="MirrorPivot"]
+position = Vector2(0, 8)
+polygon = PackedVector2Array(-32, -8, -32, -24, 32, -24, 32, -8)
+
+[node name="CollisionTransform" type="RemoteTransform2D" parent="MirrorPivot"]
+position = Vector2(0, -8)
+remote_path = NodePath("../../CollisionShape2D")
+
+[node name="MirrorHandle" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, -8, -8, 0, 8, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-7.72741, -10.0706)
+rotation = -1.309
+shape = SubResource("RectangleShape2D_af0m4")
