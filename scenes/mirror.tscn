@@ -23,6 +23,6 @@ remote_path = NodePath("../../CollisionShape2D")
 polygon = PackedVector2Array(0, -8, -8, 0, 8, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-7.72741, -10.0706)
+position = Vector2(-7.72741, -10.0705)
 rotation = -1.309
 shape = SubResource("RectangleShape2D_af0m4")
