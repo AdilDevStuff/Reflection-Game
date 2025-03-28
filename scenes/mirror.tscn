@@ -1,28 +1,59 @@
-[gd_scene load_steps=2 format=3 uid="uid://def2eojugjglu"]
+[gd_scene load_steps=5 format=3 uid="uid://def2eojugjglu"]
+
+[ext_resource type="Script" uid="uid://ucbd260sltwp" path="res://scripts/mirror.gd" id="1_5o7h0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_af0m4"]
-size = Vector2(64, 16)
+size = Vector2(64, 8)
 
-[node name="Mirror" type="CharacterBody2D" groups=["Mirror"]]
+[sub_resource type="CircleShape2D" id="CircleShape2D_af0m4"]
+radius = 100.0
+
+[sub_resource type="LabelSettings" id="LabelSettings_5o7h0"]
+font_size = 21
+outline_size = 10
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Mirror" type="CharacterBody2D" node_paths=PackedStringArray("label", "mirror_pivot") groups=["Mirror"]]
 collision_layer = 4
 collision_mask = 2
+script = ExtResource("1_5o7h0")
+label = NodePath("InputPrompt")
+mirror_pivot = NodePath("MirrorPivot")
 
 [node name="MirrorPivot" type="Node2D" parent="."]
-position = Vector2(0, -8)
-rotation = -1.309
+position = Vector2(0, -32)
 
 [node name="Sprite2D" type="Polygon2D" parent="MirrorPivot"]
-position = Vector2(0, 8)
-polygon = PackedVector2Array(-32, -8, -32, -24, 32, -24, 32, -8)
+position = Vector2(0, 16)
+polygon = PackedVector2Array(-32, -16, -32, -24, 32, -24, 32, -16)
 
 [node name="CollisionTransform" type="RemoteTransform2D" parent="MirrorPivot"]
 position = Vector2(0, -8)
 remote_path = NodePath("../../CollisionShape2D")
 
 [node name="MirrorHandle" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(0, -8, -8, 0, 8, 0)
+polygon = PackedVector2Array(0, -32, -8, 0, 8, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-7.72741, -10.0705)
-rotation = -1.309
+position = Vector2(0, -40)
 shape = SubResource("RectangleShape2D_af0m4")
+one_way_collision = true
+
+[node name="Range" type="Area2D" parent="."]
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_af0m4")
+
+[node name="InputPrompt" type="Label" parent="."]
+visible = false
+offset_left = -105.0
+offset_top = -91.0
+offset_right = 115.0
+offset_bottom = -61.0
+text = "Press Q or E to Rotate"
+label_settings = SubResource("LabelSettings_5o7h0")
+
+[connection signal="body_entered" from="Range" to="." method="_on_range_body_entered"]
+[connection signal="body_exited" from="Range" to="." method="_on_range_body_exited"]
