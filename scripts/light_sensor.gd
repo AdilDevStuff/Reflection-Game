@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name LightSensor2D
 
 var is_light_falling : bool = false
 

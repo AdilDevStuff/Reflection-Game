@@ -21,9 +21,15 @@ func _process(delta: float) -> void:
 	mirror_pivot.rotation = clamp(mirror_pivot.rotation, deg_to_rad(-75), deg_to_rad(75))
 
 func _on_range_body_entered(body:Node2D) -> void:
+	if !(body is Player2D):
+		return
+	body.current_mirror = self
 	is_in_range = true
 	mirror_handle.color = Color(0.1, 1, 0.1)
 
 func _on_range_body_exited(body:Node2D) -> void:
+	if !(body is Player2D):
+		return
+	body.current_mirror = null
 	is_in_range = false
 	mirror_handle.color = Color(1, 1, 1)

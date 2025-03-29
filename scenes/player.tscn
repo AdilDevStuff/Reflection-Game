@@ -3,8 +3,8 @@
 [ext_resource type="Script" uid="uid://dp1t2cn5hicxf" path="res://scripts/player.gd" id="1_3vyb7"]
 [ext_resource type="Texture2D" uid="uid://bh7rxnt4h0fvh" path="res://icon.svg" id="2_g2els"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qhqgy"]
-size = Vector2(64, 64)
+[sub_resource type="CircleShape2D" id="CircleShape2D_g2els"]
+radius = 25.02
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
@@ -12,8 +12,10 @@ script = ExtResource("1_3vyb7")
 jump_force = 400.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
 scale = Vector2(0.5, 0.5)
 texture = ExtResource("2_g2els")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_qhqgy")
+shape = SubResource("CircleShape2D_g2els")
+debug_color = Color(0.958419, 3.85046e-07, 0.527242, 0.42)

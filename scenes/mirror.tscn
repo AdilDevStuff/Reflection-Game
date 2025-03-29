@@ -14,7 +14,6 @@ outline_size = 10
 outline_color = Color(0, 0, 0, 1)
 
 [node name="Mirror" type="CharacterBody2D" node_paths=PackedStringArray("label", "mirror_pivot") groups=["Mirror"]]
-visible = false
 collision_layer = 4
 collision_mask = 2
 script = ExtResource("1_5o7h0")
