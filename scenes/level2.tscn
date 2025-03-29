@@ -1,0 +1,67 @@
+[gd_scene load_steps=6 format=3 uid="uid://kgeucg06f5c7"]
+
+[ext_resource type="Script" uid="uid://defd2jyehanr6" path="res://scripts/light_ray_manager.gd" id="1_alqfr"]
+[ext_resource type="PackedScene" uid="uid://bjcsplt8ouk6r" path="res://scenes/light_source.tscn" id="2_yqkch"]
+[ext_resource type="PackedScene" uid="uid://def2eojugjglu" path="res://scenes/mirror.tscn" id="3_6ep0u"]
+[ext_resource type="PackedScene" uid="uid://bcy1wol21qaoy" path="res://scenes/light_sensor.tscn" id="4_hrcei"]
+[ext_resource type="PackedScene" uid="uid://bc753si75kru0" path="res://scenes/player.tscn" id="5_xa7n4"]
+
+[node name="World" type="Node2D"]
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(577, 548)
+scale = Vector2(10.7637, 1.66563)
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground"]
+position = Vector2(44.7801, -28.2175)
+polygon = PackedVector2Array(34.6535, 31.8198, -100.206, 10.6474, -101.228, -264.924, 31.5335, -267.326, 34.5993, 155.337, 47.9776, 157.739, 46.0266, -339.37, -109.31, -338.17, -109.31, 131.923, 36.2329, 114.671)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Ground"]
+polygon = PackedVector2Array(19.7887, -216.134, 21.0894, -100.262, 12.5422, -96.6601, 11.7989, -218.536)
+
+[node name="LightSensor" parent="." instance=ExtResource("4_hrcei")]
+position = Vector2(1340, 136)
+
+[node name="LightRayManager" type="Node2D" parent="." node_paths=PackedStringArray("line", "ray_origin", "raycast")]
+position = Vector2(1416, 926)
+rotation = 3.14159
+script = ExtResource("1_alqfr")
+line = NodePath("Line2D")
+ray_origin = NodePath("RayOrigin")
+raycast = NodePath("LightRay")
+
+[node name="RayOrigin" type="Marker2D" parent="LightRayManager"]
+position = Vector2(146, 440)
+
+[node name="LightSource" parent="LightRayManager" instance=ExtResource("2_yqkch")]
+position = Vector2(32, 440)
+
+[node name="Line2D" type="Line2D" parent="LightRayManager"]
+width = 20.0
+joint_mode = 2
+begin_cap_mode = 2
+
+[node name="LightRay" type="RayCast2D" parent="LightRayManager"]
+collision_mask = 14
+
+[node name="Mirrors" type="Node2D" parent="LightRayManager"]
+position = Vector2(1416, 926)
+rotation = 3.14159
+
+[node name="Mirror" parent="LightRayManager/Mirrors" instance=ExtResource("3_6ep0u")]
+position = Vector2(26, 543)
+
+[node name="Mirror2" parent="LightRayManager/Mirrors" instance=ExtResource("3_6ep0u")]
+position = Vector2(-35, 90)
+rotation = 1.79842
+
+[node name="Mirror3" parent="LightRayManager/Mirrors" instance=ExtResource("3_6ep0u")]
+position = Vector2(736, 293)
+rotation = -1.60663
+
+[node name="Player" parent="." instance=ExtResource("5_xa7n4")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(741, 308)
+zoom = Vector2(0.6, 0.6)

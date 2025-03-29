@@ -2,11 +2,14 @@ extends CharacterBody2D
 ## IT TAKES 1second to refresh cuz i like it that way
 class_name LightSensor2D
 
+signal LightFellOnSensor
+
 var is_light_falling : bool = false
 @onready var timer: Timer = $Timer
 
 
 func on_light_fall() -> void:
+	LightFellOnSensor.emit()
 	is_light_falling = true
 	$Light2D.color = Color(1.0, 0.0, 1.0)
 	timer.start()

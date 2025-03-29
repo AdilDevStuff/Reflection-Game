@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0lrclbheissc"]
+
+[ext_resource type="Script" uid="uid://defd2jyehanr6" path="res://scripts/light_ray_manager.gd" id="2_ejswk"]
+[ext_resource type="PackedScene" uid="uid://bjcsplt8ouk6r" path="res://scenes/light_source.tscn" id="3_bbk5w"]
+[ext_resource type="PackedScene" uid="uid://def2eojugjglu" path="res://scenes/mirror.tscn" id="4_conm7"]
+[ext_resource type="PackedScene" uid="uid://bcy1wol21qaoy" path="res://scenes/light_sensor.tscn" id="5_d3jkd"]
+[ext_resource type="PackedScene" uid="uid://bc753si75kru0" path="res://scenes/player.tscn" id="6_u3awl"]
+
+[node name="World" type="Node2D"]
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(577, 548)
+scale = Vector2(10.7637, 1.66563)
+collision_layer = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ground"]
+position = Vector2(44.7414, -28.0582)
+polygon = PackedVector2Array(-6.74333, -300.946, -99.1837, -299.746, -98.812, 19.0526, 5.14849, 22.0544, 6.35625, -303.948, 18.8984, -305.149, 20.7565, 105.506, -106.152, 113.311, -108.103, -368.188, -6.55752, -366.988)
+
+[node name="LightRayManager" type="Node2D" parent="." node_paths=PackedStringArray("line", "ray_origin", "raycast")]
+script = ExtResource("2_ejswk")
+line = NodePath("Line2D")
+ray_origin = NodePath("RayOrigin")
+raycast = NodePath("LightRay")
+
+[node name="RayOrigin" type="Marker2D" parent="LightRayManager"]
+position = Vector2(120, 440)
+
+[node name="LightSource" parent="LightRayManager" instance=ExtResource("3_bbk5w")]
+position = Vector2(32, 440)
+
+[node name="Line2D" type="Line2D" parent="LightRayManager"]
+width = 20.0
+joint_mode = 2
+begin_cap_mode = 2
+
+[node name="LightRay" type="RayCast2D" parent="LightRayManager"]
+collision_mask = 14
+
+[node name="Mirrors" type="Node2D" parent="LightRayManager"]
+
+[node name="Mirror" parent="LightRayManager/Mirrors" instance=ExtResource("4_conm7")]
+position = Vector2(1048, 487)
+
+[node name="LightSensor" parent="LightRayManager" instance=ExtResource("5_d3jkd")]
+position = Vector2(1048, 22)
+
+[node name="Player" parent="." instance=ExtResource("6_u3awl")]

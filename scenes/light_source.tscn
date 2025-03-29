@@ -6,8 +6,9 @@ size = Vector2(96, 64)
 [node name="LightSource" type="CharacterBody2D" groups=["LightSource"]]
 
 [node name="Sprite2D" type="Polygon2D" parent="."]
+position = Vector2(0, 32)
 polygon = PackedVector2Array(0, -64, 64, -32, 0, 0, -32, 0, -32, -64)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(16, -32)
+position = Vector2(16, 0)
 shape = SubResource("RectangleShape2D_rgxqc")

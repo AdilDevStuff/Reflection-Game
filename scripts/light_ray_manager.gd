@@ -6,6 +6,8 @@ extends Node2D
 @export var ray_origin: Marker2D
 @export var raycast: RayCast2D
 
+@onready var light_source: CharacterBody2D = $LightSource
+
 var points: Array = []
 
 func _process(_delta):
@@ -15,7 +17,10 @@ func calculate_light_path():
 	points = [ray_origin.global_position]
 	
 	var start = ray_origin.global_position
-	var direction = Vector2.RIGHT.rotated(rotation)
+	# wth bro legit go RIGHT
+	# var direction = Vector2.RIGHT.rotated(rotation)
+	# so real
+	var direction : Vector2 = light_source.position.direction_to(ray_origin.position)
 	
 	for _i in range(max_bounces):
 		var result = cast_ray(start, direction)

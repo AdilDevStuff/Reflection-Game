@@ -14,8 +14,8 @@ func _physics_process(delta: float) -> void:
 	mouse_pos = get_global_mouse_position()
 	self.position = mouse_pos
 	
-	if Input.is_action_just_pressed("left_click"):
-		spawn_obj()
+	#if Input.is_action_just_pressed("left_click"):
+		#spawn_obj()
 	if Input.is_action_just_pressed("right_click"):
 		delete_obj()
 	
