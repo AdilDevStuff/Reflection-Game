@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var max_bounces: int = 10
+@export var max_bounces: int = 3
 
 @export var line: Line2D
 @export var ray_origin: Marker2D
@@ -24,6 +24,7 @@ func calculate_light_path():
 	
 	for _i in range(max_bounces):
 		var result = cast_ray(start, direction)
+		
 		if result:
 			var collision_point = result.position
 			var collider = result.collider
@@ -32,12 +33,19 @@ func calculate_light_path():
 			points.append(collision_point)
 			
 			if collider.is_in_group("Mirror"):
-				print("%.2f" % direction.dot(normal))
-				if direction.dot(normal) > 0:
-					break  
+				# print("%.2f" % direction.dot(normal))
+				
+				#if direction.dot(normal) > 0:
+					#break  
 				
 				direction = direction.bounce(normal)
 				start = collision_point + direction * 1
+			
+			## TODO: FIX THIS idk what to do ;C
+			elif collider.is_in_group("LightRepeater"):
+				# how do i make light repeat ?-?
+				# restart the loop ??
+				print("Repeat light")
 				
 			# so many elifs, we are not elves
 			elif collider.is_in_group("LightSensor"):
@@ -49,6 +57,7 @@ func calculate_light_path():
 		else:
 			points.append(start + direction * 2000)
 			break
+	
 	update_line(points)
 
 

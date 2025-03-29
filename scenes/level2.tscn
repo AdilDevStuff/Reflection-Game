@@ -1,10 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://kgeucg06f5c7"]
+[gd_scene load_steps=7 format=3 uid="uid://kgeucg06f5c7"]
 
 [ext_resource type="Script" uid="uid://defd2jyehanr6" path="res://scripts/light_ray_manager.gd" id="1_alqfr"]
 [ext_resource type="PackedScene" uid="uid://bjcsplt8ouk6r" path="res://scenes/light_source.tscn" id="2_yqkch"]
 [ext_resource type="PackedScene" uid="uid://def2eojugjglu" path="res://scenes/mirror.tscn" id="3_6ep0u"]
 [ext_resource type="PackedScene" uid="uid://bcy1wol21qaoy" path="res://scenes/light_sensor.tscn" id="4_hrcei"]
 [ext_resource type="PackedScene" uid="uid://bc753si75kru0" path="res://scenes/player.tscn" id="5_xa7n4"]
+
+[sub_resource type="Curve" id="Curve_alqfr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0.100093), 0.0, 0.0, 0, 0, Vector2(1, 0.507484), 0.0, 0.0, 0, 0]
+point_count = 3
 
 [node name="World" type="Node2D"]
 
@@ -38,7 +42,8 @@ position = Vector2(146, 440)
 position = Vector2(32, 440)
 
 [node name="Line2D" type="Line2D" parent="LightRayManager"]
-width = 20.0
+width = 25.0
+width_curve = SubResource("Curve_alqfr")
 joint_mode = 2
 begin_cap_mode = 2
 

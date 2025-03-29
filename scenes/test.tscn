@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bg72rdq1tbbul"]
+[gd_scene load_steps=9 format=3 uid="uid://bg72rdq1tbbul"]
 
 [ext_resource type="Texture2D" uid="uid://bh7rxnt4h0fvh" path="res://icon.svg" id="1_lpvoh"]
 [ext_resource type="Script" uid="uid://defd2jyehanr6" path="res://scripts/light_ray_manager.gd" id="2_at5dv"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://def2eojugjglu" path="res://scenes/mirror.tscn" id="4_uacia"]
 [ext_resource type="PackedScene" uid="uid://bcy1wol21qaoy" path="res://scenes/light_sensor.tscn" id="5_yk7ts"]
 [ext_resource type="PackedScene" uid="uid://bc753si75kru0" path="res://scenes/player.tscn" id="6_ajshl"]
+[ext_resource type="PackedScene" uid="uid://bf2c7jprq5rq3" path="res://scenes/light_repeater.tscn" id="6_at5dv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k0juu"]
 size = Vector2(128, 130)
@@ -30,10 +31,10 @@ ray_origin = NodePath("RayOrigin")
 raycast = NodePath("LightRay")
 
 [node name="RayOrigin" type="Marker2D" parent="LightRayManager"]
-position = Vector2(112, 408)
+position = Vector2(168, 410)
 
 [node name="LightSource" parent="LightRayManager" instance=ExtResource("3_jcd4p")]
-position = Vector2(32, 440)
+position = Vector2(32, 410)
 
 [node name="Line2D" type="Line2D" parent="LightRayManager"]
 width = 20.0
@@ -41,14 +42,36 @@ joint_mode = 2
 begin_cap_mode = 2
 
 [node name="LightRay" type="RayCast2D" parent="LightRayManager"]
-collision_mask = 14
+collision_mask = 30
+hit_from_inside = true
 
 [node name="Mirrors" type="Node2D" parent="LightRayManager"]
 
 [node name="Mirror" parent="LightRayManager/Mirrors" instance=ExtResource("4_uacia")]
-position = Vector2(1035, 434)
+position = Vector2(977, 434)
+
+[node name="Mirror2" parent="LightRayManager/Mirrors" instance=ExtResource("4_uacia")]
+position = Vector2(771, 118)
+
+[node name="Mirror3" parent="LightRayManager/Mirrors" instance=ExtResource("4_uacia")]
+position = Vector2(921, 118)
+
+[node name="Mirror4" parent="LightRayManager/Mirrors" instance=ExtResource("4_uacia")]
+position = Vector2(610, 332)
+
+[node name="Mirror5" parent="LightRayManager/Mirrors" instance=ExtResource("4_uacia")]
+position = Vector2(426, 218)
+
+[node name="Mirror6" parent="LightRayManager/Mirrors" instance=ExtResource("4_uacia")]
+position = Vector2(249, 337)
+
+[node name="Mirror7" parent="LightRayManager/Mirrors" instance=ExtResource("4_uacia")]
+position = Vector2(78, 179)
 
 [node name="LightSensor" parent="LightRayManager" instance=ExtResource("5_yk7ts")]
 position = Vector2(474, 125)
+
+[node name="LightRepeater" parent="LightRayManager" instance=ExtResource("6_at5dv")]
+position = Vector2(758, 295)
 
 [node name="Player" parent="." instance=ExtResource("6_ajshl")]

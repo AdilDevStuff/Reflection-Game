@@ -25,6 +25,7 @@ window/stretch/aspect="expand"
 Mirror=""
 LightSource=""
 LightSensor=""
+LightRepeater=""
 
 [input]
 
@@ -69,6 +70,7 @@ right_click={
 2d_physics/layer_2="World"
 2d_physics/layer_3="Mirror"
 2d_physics/layer_4="LightSensor"
+2d_physics/layer_5="LightRepeater"
 
 [rendering]
 

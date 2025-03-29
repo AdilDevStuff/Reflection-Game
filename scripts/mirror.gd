@@ -3,7 +3,7 @@ class_name Mirror2D
 
 @onready var mirror_handle: Polygon2D = $MirrorHandle
 
-@export var rotation_speed: float = 60.0
+@export var rotation_speed: float = 30.0
 @export var label: Label
 @export var mirror_pivot: Node2D
 

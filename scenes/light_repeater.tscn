@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://bf2c7jprq5rq3"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4o6m5"]
+radius = 42.0119
+
+[node name="LightRepeater" type="CharacterBody2D" groups=["LightRepeater"]]
+collision_layer = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_4o6m5")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.372352, 0.330674, 0.114947, 1)
+polygon = PackedVector2Array(-19, -19, 22, -21, 25, 8, -10, 22, -20, 0)
