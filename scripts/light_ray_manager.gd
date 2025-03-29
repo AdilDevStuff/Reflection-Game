@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var max_bounces: int = 3
+@export var max_bounces: int = 10
 
 @export var line: Line2D
 @export var ray_origin: Marker2D
@@ -19,7 +19,7 @@ func calculate_light_path():
 	
 	for _i in range(max_bounces):
 		var result = cast_ray(start, direction)
-		
+		print(result)
 		if result:
 			var collision_point = result.position
 			var collider = result.collider
@@ -34,6 +34,10 @@ func calculate_light_path():
 				
 				direction = direction.bounce(normal)
 				start = collision_point + direction * 1
+				
+			elif collider.is_in_group("LightSensor"):
+				if collider.has_method("on_light_fall"):
+					collider.on_light_fall()
 			else:
 				# Collider is blocking
 				break

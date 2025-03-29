@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcy1wol21qaoy"]
+
+[ext_resource type="Script" uid="uid://ctd0nai7nu6er" path="res://scripts/light_sensor.gd" id="1_ga1qv"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hutb0"]
+size = Vector2(32, 32)
+
+[node name="LightSensor" type="CharacterBody2D" groups=["LightSensor"]]
+collision_layer = 8
+script = ExtResource("1_ga1qv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." groups=["LightSensor"]]
+shape = SubResource("RectangleShape2D_hutb0")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+show_behind_parent = true
+polygon = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
+
+[node name="Light2D" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)

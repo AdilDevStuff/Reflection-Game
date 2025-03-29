@@ -1,11 +1,14 @@
 extends CharacterBody2D
+class_name Mirror2D
+
+@onready var mirror_handle: Polygon2D = $MirrorHandle
 
 @export var rotation_speed: float = 60.0
-
 @export var label: Label
 @export var mirror_pivot: Node2D
 
 var is_in_range: bool = false
+
 
 func _process(delta: float) -> void:
 	label.visible = is_in_range
@@ -19,6 +22,8 @@ func _process(delta: float) -> void:
 
 func _on_range_body_entered(body:Node2D) -> void:
 	is_in_range = true
+	mirror_handle.color = Color(0.1, 1, 0.1)
 
 func _on_range_body_exited(body:Node2D) -> void:
 	is_in_range = false
+	mirror_handle.color = Color(1, 1, 1)

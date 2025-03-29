@@ -1,9 +1,11 @@
 extends CharacterBody2D
+class_name Player2D
 
 @export var speed: float = 400
 @export var jump_force: float = 300
-
 @export var gravity: float = 980
+
+var current_mirror : Mirror2D
 
 func _physics_process(delta: float) -> void:
 	if not is_on_floor():
