@@ -5,7 +5,6 @@ extends Node2D
 @export var line: Line2D
 @export var ray_origin: Marker2D
 @export var raycast: RayCast2D
-var last_light_sensor : LightSensor2D
 
 var points: Array = []
 
@@ -35,25 +34,13 @@ func calculate_light_path():
 				direction = direction.bounce(normal)
 				start = collision_point + direction * 1
 				
-			elif collider.is_in_group("Ground"):
-				# ground is used for walls, ground and the world :C
-				pass
-				
+			# so many elifs, we are not elves
 			elif collider.is_in_group("LightSensor"):
 				if collider.has_method("on_light_fall"):
 					collider.on_light_fall()
-				last_light_sensor = collider
 			else:
-				# i know bad way to know if it was colliding with light sensor
-				# and now it is not colliding with it
-				# but we may only have one of them
-				if last_light_sensor:
-					last_light_sensor.on_light_unfall()
-					
-				last_light_sensor = null
 				# Collider is blocking
 				break
-		
 		else:
 			points.append(start + direction * 2000)
 			break
